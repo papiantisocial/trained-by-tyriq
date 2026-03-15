@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trained by Tyriq</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Outfit;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+/* NAV */
+
+nav{
+position:fixed;
+width:100%;
+padding:25px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+transition:.4s;
+}
+
+nav.scrolled{
+background:rgba(0,0,0,.8);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+background:linear-gradient(90deg,#ff004c,#00eaff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav ul{
+display:flex;
+gap:40px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00eaff;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+background:
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.95)),
+url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop") center/cover;
+}
+
+.hero h1{
+font-size:75px;
+font-weight:900;
+margin-bottom:10px;
+}
+
+.dynamic{
+color:#00eaff;
+}
+
+.hero p{
+max-width:650px;
+opacity:.85;
+margin-bottom:35px;
+}
+
+.btn{
+padding:18px 45px;
+border:none;
+border-radius:50px;
+font-weight:700;
+cursor:pointer;
+background:linear-gradient(90deg,#ff004c,#00eaff);
+color:black;
+transition:.4s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #00eaff;
+}
+
+/* SECTION */
+
+.section{
+padding:120px 8%;
+text-align:center;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+margin-top:60px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+padding:40px;
+border-radius:25px;
+backdrop-filter:blur(15px);
+transition:.4s;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.card:hover{
+transform:translateY(-15px) scale(1.03);
+box-shadow:0 0 30px rgba(0,234,255,.3);
+}
+
+.price{
+font-size:50px;
+margin:20px 0;
+background:linear-gradient(90deg,#ff004c,#00eaff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* SCROLL REVEAL */
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* FOOTER */
+
+footer{
+padding:50px;
+text-align:center;
+background:black;
+margin-top:100px;
+opacity:.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="nav">
+<div class="logo">TRAINED BY TYRIQ</div>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#programs">Programs</a></li>
+<li><a href="#contact">Apply</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="home">
+<h1>GET <span class="dynamic">STRONGER</span></h1>
+<p>Physique development • Fat loss • Strength coaching • Online Coaching</p>
+<button class="btn" onclick="goPrograms()">Start Now</button>
+</section>
+
+<section class="section reveal" id="programs">
+<h2>Coaching Programs</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Online Coaching</h3>
+<div class="price">$149</div>
+<p>Custom plan, macros, weekly adjustments.</p>
+</div>
+
+
+<div class="card">
+<h3>Lean Out</h3>
+<div class="price">$99</div>
+<p>12 week aggressive fat loss phase.</p>
+</div>
+
+</div>
+</section>
+
+<section class="section reveal" id="contact">
+<h2>Apply for Coaching</h2>
+<p> Email trainedbytyriq@gmail.com</p>
+</section>
+
+<footer>
+<p>© 2026 Trained by Tyriq</p>
+</footer>
+
+<script>
+
+/* NAV SCROLL */
+
+window.addEventListener("scroll",()=>{
+nav.classList.toggle("scrolled",window.scrollY>60)
+})
+
+/* HERO WORD ROTATOR */
+
+let words = ["STRONGER","LEANER","CONFIDENT","POWERFUL"]
+let w = 0
+
+setInterval(()=>{
+w++
+if(w>=words.length) w=0
+document.querySelector(".dynamic").innerText = words[w]
+},2000)
+
+/* BUTTON SCROLL */
+
+function goPrograms(){
+document.getElementById("programs").scrollIntoView({
+behavior:"smooth"
+})
+}
+
+/* SCROLL REVEAL */
+
+function reveal(){
+let reveals = document.querySelectorAll(".reveal")
+
+for(let i=0;i<reveals.length;i++){
+let windowHeight = window.innerHeight
+let top = reveals[i].getBoundingClientRect().top
+let visible = 100
+
+if(top < windowHeight - visible){
+reveals[i].classList.add("active")
+}
+}
+}
+
+window.addEventListener("scroll",reveal)
+
+</script>
+
+</body>
+</html>
